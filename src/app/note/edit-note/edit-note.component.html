@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <div class="shadow p-4">
+    <h3>{{selectedItem.title}}</h3>
+    <form [formGroup]="editNoteForm" (ngSubmit)="onUpdate()">
+      <!-- Note Title -->
+      <div class="form-group">
+        <label for="noteTitle">Title</label>
+        <input type="text" 
+          class="form-control"
+          [ngClass]="!editNoteForm.get('noteTitle')!.valid && editNoteForm.get('noteTitle')!.touched ? 'is-invalid':''"
+          [ngClass]="editNoteForm.get('noteTitle')!.valid  ? 'is-valid':''"
+          formControlName="noteTitle">
+        <span 
+          *ngIf="!editNoteForm.get('noteTitle')!.valid && editNoteForm.get('noteTitle')!.touched"
+          class="text-danger mt-1" #noteTitleErr>Please Enter Note Title
+        </span>
+      </div>
+      <!-- Note Desc -->
+      <div class="form-group">
+        <label for="noteDesc">Description</label>
+        <textarea 
+          [ngClass]="(!editNoteForm.get('noteDesc')!.valid && editNoteForm.get('noteDesc')!.touched)? 'is-invalid':''"
+          [ngClass]="editNoteForm.get('noteDesc')!.valid ? 'is-valid':''" formControlName="noteDesc" 
+          rows="4" class="form-control"></textarea>
+        <span 
+          *ngIf="!editNoteForm.get('noteDesc')!.valid  && editNoteForm.get('noteDesc')!.touched"
+          class="text-danger mt-1">Please Enter Note Description
+        </span>          
+      </div>
+      <!-- Add and Reset Button -->
+      <div class="row">
+        <button 
+          type="submit" 
+          class="btn btn-warning px-5 mt-2" 
+          [disabled]="editNoteForm.invalid || editNoteForm.pristine">Edit
+        </button>
+      </div>
+    </form>
+  </div>
+  <button class="btn btn-primary mt-3 ml-5" (click)="backToPreviousBtn()">Back to List</button>
+</div>

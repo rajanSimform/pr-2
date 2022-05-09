@@ -1,0 +1,12 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="./">Note App</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-dropdown" aria-controls="nav-dropdown" aria-expanded="false" aria-label="Toggle navigation" (click)="navDropDown.classList.toggle('collapse')">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="nav-dropdown" #navDropDown>
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" routerLink="">Home</a>
+      <a class="nav-item nav-link" routerLinkActive="active" routerLink="/notes">Notes</a>
+    </div>
+  </div>
+</nav>

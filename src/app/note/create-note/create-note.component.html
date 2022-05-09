@@ -1,0 +1,48 @@
+<div class="container mt-3">
+  <h2>Add Note</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <form [formGroup]="addNoteForm" (ngSubmit)="onSubmit()">
+        <!-- Note Title -->
+        <div class="form-group">
+          <label for="noteTitle">Title</label>
+          <input type="text" 
+            class="form-control"
+            [ngClass]="!addNoteForm.get('noteTitle')!.valid && addNoteForm.get('noteTitle')!.touched ? 'is-invalid':''"
+            [ngClass]="addNoteForm.get('noteTitle')!.valid  ? 'is-valid':''"
+            formControlName="noteTitle">
+          <span 
+            *ngIf="!addNoteForm.get('noteTitle')!.valid && addNoteForm.get('noteTitle')!.touched"
+            class="text-danger mt-1" #noteTitleErr>Please Enter Note Title
+          </span>
+        </div>
+        <!-- Note Desc -->
+        <div class="form-group">
+          <label for="noteDesc">Description</label>
+          <textarea 
+            [ngClass]="(!addNoteForm.get('noteDesc')!.valid && addNoteForm.get('noteDesc')!.touched)? 'is-invalid':''"
+            [ngClass]="addNoteForm.get('noteDesc')!.valid ? 'is-valid':''" formControlName="noteDesc" 
+            rows="4" class="form-control"></textarea>
+          <span 
+            *ngIf="!addNoteForm.get('noteDesc')!.valid  && addNoteForm.get('noteDesc')!.touched"
+            class="text-danger mt-1">Please Enter Note Description
+          </span>          
+        </div>
+        <!-- Add and Reset Button -->
+        <div class="row">
+          <div class="col-md-6">
+            <button 
+              type="submit" 
+              class="btn btn-success btn-block" 
+              [disabled]="addNoteForm.invalid">Add
+            </button>
+          </div>
+          <div class="col-md-6">
+            <button type="reset" class="btn btn-danger btn-block" (click)="onReset()">Reset</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <button class="btn btn-primary mt-3" (click)="backToPreviousBtn()">Back to List</button>
+</div>

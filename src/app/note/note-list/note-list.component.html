@@ -1,0 +1,18 @@
+<div class="container mt-3">
+  <h3 class="text-center">All Notes</h3>
+  <h4 *ngIf="allNotes.length === 0"
+    class="font-weight-bold text-center" >No Notes available
+  </h4>
+  <ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between" 
+      *ngFor="let note of allNotes,let i = index" 
+      [id]="i+1" #noteItem>
+      <div>{{note.title}}</div>
+      <div class="btn-group">
+        <div class="btn btn-sm btn-info px-3" (click)="viewNote(+noteItem.id)">View</div>
+        <div class="btn btn-sm btn-danger" (click)="deleteNote(+noteItem.id)">Delete</div>
+      </div>
+    </li>
+  </ul>
+  <button class="btn btn-success mt-3" (click)="addNewNote()">Add New Note</button>
+</div>
