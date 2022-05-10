@@ -30,7 +30,13 @@ export class EditNoteComponent implements OnInit {
     });
   }
 
-  onUpdate() {}
+  onUpdate() {
+    this.selectedItem.title = this.editNoteForm.value.noteTitle;
+    this.selectedItem.desc = this.editNoteForm.value.noteDesc;
+    this.noteService.updateNoteById(this.selectedId, this.selectedItem);
+    alert('Product Updated Successfully');
+    this.router.navigate(['../'], { relativeTo: this.route });
+  }
 
   backToPreviousBtn() {
     this.router.navigate(['../'], { relativeTo: this.route });

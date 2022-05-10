@@ -1,6 +1,12 @@
 <div class="container mt-4">
   <div class="shadow p-4">
-    <h3>{{selectedItem.title}}</h3>
+    <div class="d-flex justify-content-between">
+      <div>
+        <h3>{{selectedItem.title}}</h3>
+      </div>
+      <span class="text-muted">Created At : {{selectedItem.createdAt | date:'shortDate'}}</span>
+    </div>
+    <hr>
     <form [formGroup]="editNoteForm" (ngSubmit)="onUpdate()">
       <!-- Note Title -->
       <div class="form-group">
@@ -29,13 +35,15 @@
       </div>
       <!-- Add and Reset Button -->
       <div class="row">
-        <button 
-          type="submit" 
-          class="btn btn-warning px-5 mt-2" 
-          [disabled]="editNoteForm.invalid || editNoteForm.pristine">Edit
-        </button>
+        <div class="col">
+          <button 
+            type="submit" 
+            class="btn btn-warning px-5 mt-2" 
+            [disabled]="editNoteForm.invalid || editNoteForm.pristine">Edit
+          </button>
+        </div>
       </div>
     </form>
   </div>
-  <button class="btn btn-primary mt-3 ml-5" (click)="backToPreviousBtn()">Back to List</button>
+  <button class="btn btn-primary mt-3" (click)="backToPreviousBtn()">Back to List</button>
 </div>
