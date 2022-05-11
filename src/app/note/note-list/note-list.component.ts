@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Note } from 'src/app/models/note.model';
 import { NoteService } from 'src/app/services/note.service';
 
@@ -8,8 +9,9 @@ import { NoteService } from 'src/app/services/note.service';
   templateUrl: './note-list.component.html',
   styles: [],
 })
-export class NoteListComponent implements OnInit {
+export class NoteListComponent implements OnInit, OnDestroy {
   allNotes: Note[];
+  noteSubs: Subscription;
   constructor(
     private noteService: NoteService,
     private route: ActivatedRoute,
@@ -17,7 +19,10 @@ export class NoteListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.allNotes = this.noteService.getAllNotes();
+    this.noteService.getAllNotes();
+    this.noteSubs = this.noteService._noteSubject.subscribe(
+      (x) => (this.allNotes = x)
+    );
   }
 
   addNewNote() {
@@ -30,5 +35,9 @@ export class NoteListComponent implements OnInit {
 
   deleteNote(id: number) {
     this.noteService.deleteNoteById(id);
+  }
+
+  ngOnDestroy(): void {
+    this.noteSubs.unsubscribe();
   }
 }

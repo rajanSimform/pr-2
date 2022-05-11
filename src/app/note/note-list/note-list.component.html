@@ -5,6 +5,11 @@
   </h4>
   <ul class="list-group">
     <li class="list-group-item d-flex justify-content-between" 
+      [ngClass]="{
+        'bg-success':note.created,
+        'bg-warning':note.updated,
+        'bg-danger text-white disabled':note.deleted
+      }"
       *ngFor="let note of allNotes,let i = index" 
       [id]="i+1" #noteItem>
       <div>{{note.title}}</div>

@@ -32,7 +32,6 @@ export class CreateNoteComponent implements OnInit {
     const newNote = new Note(title, desc, new Date());
 
     this.noteService.addNewNote(newNote);
-    console.log(this.noteService.getAllNotes());
     this.onReset();
   }
 
